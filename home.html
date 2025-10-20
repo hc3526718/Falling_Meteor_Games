@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Maze Games</title>
+  <link rel="stylesheet" href="../CSS_Files/styles.css">
+</head>
+
+<video autoplay muted loop playsinline class="background-video">
+    <source src="../assets/demo-video.mp4" type="video/mp4">
+</video>
+
+<body>
+  <audio id="bgMusic" src="../assets/game-music-loop-6-144641.mp3" autoplay loop></audio>
+
+  <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="registration.html">Registration</a></li>
+        <li><a href="highscore.html">Highscores</a></li>
+  </ul>
+
+    <div id="top-right">
+        <div class="icon">
+            <img src="../assets/account-icon-white.png" alt="Account Info">
+            <div class="tooltip">
+            <a>Username: <span id="playerUsername"> - </span></a> <br>
+            <a>Password: <span id="playerPass"> - </span></a>
+            </div>
+        </div>
+    
+        <div class="icon">
+            <img src="../assets/bonus_coin.png" alt="Coin Balance">
+            <div class="tooltip">
+            <a>Balance: <span id="playerCoins"> - </span></a>
+            </div>
+        </div>
+    </div>
+  
+    <div class="hero-content">
+      <h1>Welcome To Falling Meteor Games</h1><br>
+      <p>Test your reflexes, timing, and focus in an ever-falling world of chaos.</p>
+      <p>Collect coins, dodge the meteors, and climb the public leaderboard to become number 1.</p><br>
+      <h3>Dodge The Meteors And Be The Best, Simple!</h3>
+      <br>
+      <div id="buttons">
+        <a href="login.html" class="buttons">Login And Play</a>
+        <a href="registration.html" class="buttons">Create Your Account</a>
+    </div>
+    </div>
+  </div>
+
+<script>
+
+  window.addEventListener('load', function () {
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.4;
+    if (sessionStorage.getItem('pageLoadedOnce')) {
+      console.log('✅ Home Page loaded!');
+      bgMusic.currentTime = 0;
+      bgMusic.play();
+    }
+    else{
+      // Restore previous playback time (if available)
+      const lastTime = sessionStorage.getItem('bgMusicTime');
+      if (lastTime) {
+        bgMusic.currentTime = parseFloat(lastTime);
+      }
+
+      // Save time every second
+      setInterval(() => {
+        sessionStorage.setItem('bgMusicTime', bgMusic.currentTime);
+      }, 1000);
+
+      // Optionally pause music on certain pages (like login or game over)
+      if (window.location.pathname.includes('falling')){
+        bgMusic.pause();
+      }
+    }
+  });
+
+</script>
+<script src="../Javascript_Files/home.js"></script>
+<script src="../Javascript_Files/usersession.js"></script>
+
+</body>
+</html>

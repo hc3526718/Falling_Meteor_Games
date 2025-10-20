@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Maze Game</title>
+  <link rel="stylesheet" href="../CSS_Files/style_falling2.css">
+  <link rel="stylesheet" href="../CSS_Files/styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="scoreBoard">Score:<span id="score">0</span></div>  
+    <div id="player"></div>
+    <div id="maze"></div>
+    <div id="bonusContainer"></div>
+  </div>
+  <div id="gameOverOverlay">
+      <div id="highscore">
+      <div id="high-score-text"></div>
+      <div id="high-score"></div>
+    </div>
+    <img src="../assets/Game_Over.png" alt="Game Over" class="gameover-image">
+    <div id="gameover-buttons">
+      <p id="coinsEarnedText"></p>
+      <p id="bonusContainer"></p><br>
+      <button id="restartBtn" class="buttons">Restart</button>
+      <button id="levelsBtn" class="buttons">Back</button>
+    </div>
+  </div>  
+  <script type="module" src="../Javascript_Files/falling2.js"></script>
+</body>
+</html>

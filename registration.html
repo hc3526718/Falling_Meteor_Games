@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Maze Games</title>
+  <link rel="stylesheet" href="../CSS_Files/styles.css">
+</head>
+<canvas id="particlesCanvas"></canvas>
+
+<body>
+  <audio id="bgMusic" src="../assets/game-music-loop-6-144641.mp3" autoplay loop></audio>
+
+  <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="registration.html" class="active">Registration</a></li>
+        <li><a href="highscore.html">Highscores</a></li>
+  </ul>
+
+    <div id="top-right">
+        <div class="icon">
+            <img src="../assets/account-icon-white.png" alt="Account Info">
+            <div class="tooltip">
+            <a>Username: <span id="playerUsername"> - </span></a> <br>
+            <a>Password: <span id="playerPass"> - </span></a>
+            </div>
+        </div>
+    
+        <div class="icon">
+            <img src="../assets/bonus_coin.png" alt="Coin Balance">
+            <div class="tooltip">
+            <a>Balance: <span id="playerCoins"> - </span></a>
+            </div>
+        </div>
+    </div>
+  <div id="menu-container">
+    <br><br><br><br><br><br>
+    <h1>Registration</h1>
+    <br><br>
+    <div id="login-box">
+      <p id="UserNameText">Username:</p>
+      <input type="username" id="userName" class="text-entry" placeholder="Enter your username" required><br>
+      <p id="EmailText">Email: </p>
+      <input type="email" id="emailInput" class="text-entry" placeholder="Enter your email" required><br>
+      <p id="PassText">Password:</p>
+      <input type="password" id="passwordInput" class="text-entry" placeholder="Enter your password" required><br>
+      <div id="strengthMeter">
+        <div id="strengthBar"></div>
+      </div>
+      <p id="strengthText">Strength: <span>None</span></p><br>
+      <p id="PhoneNumText">Phone Number:</p>
+      <input type="phone number" id="phoneNum" class="text-entry" placeholder="Enter your phone number(no spaces/dashes)" required><br>
+            <p id="errorMsg" class="errorTxt"></p>
+            <p id="successMsg" class="successTxt"></p><br>
+      <button id="registerBtn" class="buttons">Register</button>
+      <button id="loginBtn" class="hidden buttons" href="login.html">Login To Account</button>
+    </div>
+
+<script>
+  const bgMusic = document.getElementById('bgMusic');
+  bgMusic.volume = 0.4;
+
+  // Restore previous playback time (if available)
+  const lastTime = sessionStorage.getItem('bgMusicTime');
+  if (lastTime) {
+    bgMusic.currentTime = parseFloat(lastTime);
+  }
+
+  // Save time every second
+  setInterval(() => {
+    sessionStorage.setItem('bgMusicTime', bgMusic.currentTime);
+  }, 1000);
+
+  // Optionally pause music on certain pages (like login or game over)
+  if (window.location.pathname.includes('falling')){
+    bgMusic.pause();
+  }
+</script>
+<script src="../Javascript_Files/registration.js"></script>
+<script src="../Javascript_Files/usersession.js"></script>
+<script src="../Javascript_Files/particlecanvas.js"></script>
+
+</body>
+</html>

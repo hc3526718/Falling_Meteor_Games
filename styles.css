@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background: #121212;            /* Dark background */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  /* Main Container */
+  #game-container {
+    text-align: center;
+  }
+  
+  /* Title */
+  #game-container h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #f5f5f5;
+  }
+  
+  /* Level Buttons */
+  .buttons {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 120px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #1e88e5;             /* Blue button */
+    border: none;
+    border-radius: 80px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+    width: 300px;
+    align-items: center;    /* Center everything horizontally */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Hover Effect */
+  .buttons:hover {
+    background: #1565c0;
+    transform: translateY(-2px);
+  }
+
+  .errorTxt{
+    font-family: Arial, sans-serif;
+    color: #dc1212;
+  }
+
+  .successTxt{
+    font-family: Arial, sans-serif;
+    color: #07d107;
+  }
+
+  .text-entry {
+    color: white;
+    border-radius: 40px;
+    padding: 12px 16px; /* ✅ smaller horizontal padding */
+    text-align: left; /* ✅ align text to the left */
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box; 
+    width: 550px;
+    display: block;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px auto;
+}
+
+.text-entry::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.text-entry:focus {
+  border-color: #00d9ff;
+  box-shadow: 0 0 10px #00d9ff, 0 0 25px #00d9ff44;
+  background: rgba(0, 217, 255, 0.1);
+  transform: scale(1.02);
+}
+
+    /* Container in top-left */
+  #top-right {
+    position: fixed;
+    top: 25px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: right;
+    z-index: 200;
+  }
+
+    /* Each icon container */
+  .icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .icon img {
+    width: 50px;
+    height: 50px;
+  }
+
+    /* Tooltip style */
+  .tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    text-align: left;
+    padding: 6px 10px;
+    border-radius: 6px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+    z-index: 100;
+  }
+
+  .icon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #top-lower-right{
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: right;
+    z-index: 200;
+  }
+
+  ul {
+    position: fixed;
+    list-style-type: none;
+    top: 10px;
+    background-color: #333333;
+    display: flex;
+    z-index: 75;
+    width: 1500px;
+    font-size: 20px;
+  }
+
+  ul li a {
+    display: block;
+    color: white;
+    padding: 30px 20px;
+    text-decoration: none;
+    }
+
+  ul li a:hover {
+    background-color: #22425f94;
+  }
+
+  ul li a.active{
+    background-color: #107fe0a6;
+  }
+
+.hidden {
+            display: none; /* Hides the button */
+        }
+
+.highscore-container {
+  position: fixed;
+  flex-direction: column; /* Stack title, buttons, table vertically */
+  align-items: center;    /* Center everything horizontally */
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+}
+
+.highscore-container h1 {
+  z-index: 1;
+  font-size: 2em;
+  top: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px; /* spacing between buttons and table */
+}
+
+.filter-buttons button {
+  background: #1e88e5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-buttons button.active {
+  background: #0d47a1;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.7);
+}
+
+#highscoreTable {
+  border-collapse: collapse;
+  width: 700px;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#highscoreTable th,
+#highscoreTable td {
+  padding: 12px 20px;
+}
+
+#highscoreTable th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#highscoreTable tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#highscoreTable tr:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transition: 0.3s;
+}
+
+#strengthMeter {
+  height: 8px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 4px;
+  margin: 3px 0;
+  overflow: hidden;
+}
+
+#strengthBar {
+  height: 100%;
+  width: 0%;
+  background: red;
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+#strengthText {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 850px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.hero-content h3 {
+  font-size: 1.3rem;
+  color: #dedede;
+  font-weight: 600;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  object-fit: cover;
+  filter: brightness(60%);
+}
+
+#particlesCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  background: black;
+  display: block;
+  z-index: -1;
+}
+
+#shop-container {
+  text-align: center;
+  width: 90%;
+  max-width: 900px;
+  padding-top: 500px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#coinDisplay {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+#shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+}
+
+.item-card {
+  background: #222a38;
+  border-radius: 12px;
+  padding: 15px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.item-card:hover {
+  transform: translateY(-4px);
+}
+
+.item-image {
+  width: 96px;
+  height: 84px;
+  background: #000;
+  margin: 0 auto 10px;
+  image-rendering: pixelated;
+  background-size: cover;
+  border-radius: 6px;
+}
+
+.item-name {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.buy-button {
+  background: #1e90ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.buy-button:hover {
+  background: #0078e7;
+}
+
+.buy-button.disabled {
+  background: grey;
+  cursor: not-allowed;
+}
